@@ -1,17 +1,15 @@
-import Footer from "../landingPage/components/Footer"
-import ContactHero from "./ContactHero"
-import TestCompon from "./TestCompon"
+import Footer from "../landingPage/components/Footer";
+import ContactHero from "./ContactHero";
 
 const Contact = () => {
+  return (
+    <>
+      <ContactHero />
 
-    return (
-        <>
-            <ContactHero />
+      {/* <TestCompon /> */}
+      <Footer />
+    </>
+  );
+};
 
-            {/* <TestCompon /> */}
-            <Footer />
-        </>
-    )
-}
-
-export default Contact
+export default Contact;
