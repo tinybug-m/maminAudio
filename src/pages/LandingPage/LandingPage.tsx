@@ -1,9 +1,8 @@
 import * as React from "react";
 
-// import { Box } from "@mui/material";
-import Hero from "./components/Hero";
-import Features from "./components/Features";
-import Footer from "./components/Footer";
+import Hero from "@/pages/LandingPage/components/Hero";
+import Features from "@/landingPage/components/Features";
+import Footer from "@/landingPage/components/Footer";
 import { Box } from "@mui/material";
 
 export default function LandingPage() {

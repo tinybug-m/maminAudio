@@ -1,23 +1,15 @@
 import * as React from "react";
-// import { Box } from "@mui/material";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import MCard from "./Card/MCard";
+import MCard from "../../../landingPage/components/Card/MCard";
 import { useState } from "react";
-import SocialMediaIcons from "./SocialMediaIcons";
+import SocialMediaIcons from "../../../landingPage/components/SocialMediaIcons";
 import { motion } from "framer-motion";
-import { heroDefaultCss } from "./data/heroDefaultCss";
+import { heroDefaultCss } from "../../../landingPage/components/data/heroDefaultCss";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 
-const backgroundStyle = {
-  top: 0,
-  left: 0,
-  position: "absolute",
-  zIndex: -1,
-  width: "100%",
-};
 const maminLogo = {
   width: "507px",
   height: "auto",
@@ -47,7 +39,7 @@ export default function Hero() {
   return (
     <Box
       id="hero"
-      sx={(theme) => ({
+      sx={() => ({
         width: "100%",
         ...heroDefaultCss,
         backgroundImage: 'url("../../static/peakpx 1.png")',
@@ -75,7 +67,6 @@ export default function Hero() {
           initial={{ y: -200 }}
           whileInView={{ y: 0 }}
           transition={{ duration: 0.3 }}
-          exit={console.log("done")}
         >
           <img style={maminLogo} src={"../../static/mamin.png"} />
         </motion.div>

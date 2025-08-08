@@ -1,14 +1,14 @@
-import LandingPage from "@/landingPage/LandingPage";
+import LandingPage from "@/pages/LandingPage/LandingPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AboutPage from "@/about/AboutPage";
 import Contnact from "@/contact/ContactPage";
 import { ThemeProvider } from "@mui/material/styles";
 
-import AppAppBar from "@/landingPage/components/AppAppBar";
 import CssBaseline from "@mui/material/CssBaseline";
-import Loading from "@/landingPage/components/universal/Loading";
+import Loading from "@/components/universal/Loading";
 import { defaultTheme } from "@/themes";
 import { useState } from "react";
+import AppMenu from "@/components/AppMenu";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -22,7 +22,7 @@ function App() {
       <BrowserRouter>
         <CssBaseline />
         <Loading />
-        <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+        <AppMenu mode={mode} toggleColorMode={toggleColorMode} />
         <Routes path="/">
           <Route index element={<LandingPage />} />
           <Route path="about" element={<AboutPage />} />

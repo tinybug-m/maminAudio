@@ -18,11 +18,11 @@ function Loading() {
     if (document.readyState === "complete") {
       handleLoading();
     } else {
-      document.addEventListener("DOMContentLoaded", handleLoading());
+      document.addEventListener("DOMContentLoaded", handleLoading);
     }
 
     return () => {
-      document.removeEventListener("DOMContentLoaded", handleLoading());
+      document.removeEventListener("DOMContentLoaded", handleLoading);
     };
   }, []);
 
