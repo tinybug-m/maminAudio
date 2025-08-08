@@ -4,10 +4,10 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import SvgIcon from "@mui/material/SvgIcon";
+import React from "react";
 
 const SocialMediaIcons = (props) => {
   const { mode, color } = props;
-  // const [iconColor, setIconColor] = useState('')
   const SocialMediaLinks = [
     { name: "youtube", url: "https://www.youtube.com/@mamadaminbeats" },
     { name: "instagram", url: "https://www.instagram.com/maminaudio/" },

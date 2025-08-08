@@ -4,7 +4,7 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import MCard from "../../../landingPage/components/Card/MCard";
 import { useState } from "react";
-import SocialMediaIcons from "../../../landingPage/components/SocialMediaIcons";
+import SocialMediaIcons from "../../../components/universal/SocialMediaIcons";
 import { motion } from "framer-motion";
 import { heroDefaultCss } from "../../../landingPage/components/data/heroDefaultCss";
 import { useNavigate } from "react-router-dom";

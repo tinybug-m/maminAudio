@@ -1,4 +1,4 @@
-import Footer from "../landingPage/components/Footer";
+import Footer from "../components/universal/Footer";
 import ContactHero from "./ContactHero";
 
 const Contact = () => {
