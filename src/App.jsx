@@ -8,9 +8,10 @@ import AppAppBar from "@/landingPage/components/AppAppBar";
 import CssBaseline from "@mui/material/CssBaseline";
 import Loading from "@/landingPage/components/universal/Loading";
 import { defaultTheme } from "@/themes";
+import { useState } from "react";
 
 function App() {
-  const [mode, setMode] = React.useState("light");
+  const [mode, setMode] = useState("light");
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === "dark" ? "light" : "dark"));
