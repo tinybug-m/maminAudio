@@ -2,6 +2,7 @@ import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import { MainColors } from "@/themes/colors";
 
 function Loading() {
   const [loadingPage, setLoadingPage] = useState(true);
@@ -12,13 +13,19 @@ function Loading() {
       setLoadingPage(false);
     }, 2000);
   };
+
   useEffect(() => {
     if (document.readyState === "complete") {
       handleLoading();
     } else {
       document.addEventListener("DOMContentLoaded", handleLoading());
     }
+
+    return () => {
+      document.removeEventListener("DOMContentLoaded", handleLoading());
+    };
   }, []);
+
   useEffect(() => {
     window.scroll(0, 0);
     document.querySelector("html").style.paddingTop = loadingPage
@@ -33,7 +40,11 @@ function Loading() {
         <Box
           component={motion.div}
           animate={{
-            backgroundColor: ["#553a5b", "#7A5383", "#553a5b"],
+            backgroundColor: [
+              MainColors.primary.dark,
+              MainColors.primary.main,
+              MainColors.primary.light,
+            ],
           }}
           transition={{
             duration: 3,
@@ -47,7 +58,6 @@ function Loading() {
             left: 0,
             right: 0,
             bottom: 0,
-            // backgroundColor: "secondary.main",
             textAlign: "center",
             alignContent: "center",
             zIndex: 10000,
