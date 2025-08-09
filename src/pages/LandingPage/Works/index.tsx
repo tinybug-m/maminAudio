@@ -6,9 +6,11 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
 
-import WorkCardSkeleton from "@/pages/LandingPage/WorkCard/WorkCardSkeleton";
-import WorkCard, { WorkProps } from "@/pages/LandingPage/WorkCard/WorkCard";
-import OpenedWorkCard from "@/pages/LandingPage/WorkCard/OpenedWorkCard";
+import WorkCardSkeleton from "@/pages/LandingPage/Works/WorkCard/WorkCardSkeleton";
+import WorkCard, {
+  WorkProps,
+} from "@/pages/LandingPage/Works/WorkCard/WorkCard";
+import OpenedWorkCard from "@/pages/LandingPage/Works/WorkCard/OpenedWorkCard";
 
 import { AnimatePresence } from "framer-motion";
 
