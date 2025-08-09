@@ -1,4 +1,4 @@
-import { getIton } from "@/utils";
+import { getIton } from "@/utils/utils";
 import { Typography, Button, Grid, Stack } from "@mui/material";
 
 import { Suspense } from "react";
