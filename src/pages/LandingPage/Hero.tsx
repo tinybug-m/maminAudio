@@ -2,11 +2,10 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import MCard from "../../../landingPage/components/Card/MCard";
+import MCard from "./HeroCard";
 import { useState } from "react";
-import SocialMediaIcons from "../../../components/universal/SocialMediaIcons";
+import SocialMediaIcons from "@/components/universal/SocialMediaIcons";
 import { motion } from "framer-motion";
-import { heroDefaultCss } from "../../../landingPage/components/data/heroDefaultCss";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 
@@ -14,6 +13,10 @@ const maminLogo = {
   width: "507px",
   height: "auto",
   maxWidth: "100%",
+};
+export const heroDefaultCss = {
+  minHeight: "724px",
+  height: "100%",
 };
 
 export default function Hero() {

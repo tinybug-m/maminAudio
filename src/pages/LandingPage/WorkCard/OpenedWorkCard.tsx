@@ -1,32 +1,15 @@
-import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
 import { motion } from "framer-motion";
-import { Button, Chip, Grid, Skeleton } from "@mui/material";
+import { Button, Chip, Grid } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { useEffect, useState } from "react";
-import { InstagramEmbed } from "react-social-media-embed";
+import React from "react";
+import { WorkCardProps } from "@/pages/LandingPage/WorkCard/WorkCard";
 
-import ReactPlayer from "react-player";
-
-const OpenedWorkCard = ({ data, index, setSelectedWork }) => {
-  const [videoIsReady, setVideoIsReady] = useState(0);
-  const theme = useTheme();
-  useEffect(() => {
-    setTimeout(() => {}, 400);
-  }, []);
-
-  const handleVideoIsReady = (value) => {
-    setVideoIsReady(value ? 1 : 0);
-    console.log("aloo");
-  };
+const OpenedWorkCard = ({ data, index, setSelectedWork }: WorkCardProps) => {
   return (
     <>
       <Card
@@ -63,16 +46,12 @@ const OpenedWorkCard = ({ data, index, setSelectedWork }) => {
           aria-label="fingerprint"
           color="secondary"
           onClick={() => {
-            setSelectedWork(false);
+            setSelectedWork(0);
           }}
         >
           <CloseIcon sx={{ color: "white" }} />
         </IconButton>
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          // columns={{ xs: 4, sm: 8, md: 12 }}
-        >
+        <Grid container spacing={{ xs: 2, md: 3 }}>
           <Grid item xs={12} sm={4}>
             <motion.div
               layoutId={`img_${index}`}
@@ -84,7 +63,6 @@ const OpenedWorkCard = ({ data, index, setSelectedWork }) => {
             >
               <iframe
                 src={`https://video.maminaudio.com/?videoID=${data.video}`}
-                frameborder="0"
                 style={{
                   maxHeight: "calc(90vh - 32px)",
                   aspectRatio: 6 / 10.5,
@@ -94,39 +72,6 @@ const OpenedWorkCard = ({ data, index, setSelectedWork }) => {
                   width: "100%",
                 }}
               ></iframe>
-              {/* <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                <InstagramEmbed url="https://www.instagram.com/p/C844PaJoJOZ/"  />
-                            </div> */}
-              {/* {
-                                !videoIsReady &&
-                                <Skeleton
-                                variant="rounded"
-                                animation="wave"
-                                width={"100%"}
-                                height={"100%"}
-                                // opacity={videoIsReady}
-                                style={{
-                                    transition: "0.3s",
-                                    maxHeight: "calc(90vh - 32px)",
-                                    borderRadius:5
-                                }}
-                            />
-                            }
-
-                            <ReactPlayer
-                                width={"100%"}
-                                height={"100%"}
-                                style={{
-                                    maxHeight: "calc(90vh - 32px)",
-                                    aspectRatio: 6 / 10.5,
-                                    borderRadius: 20,
-                                    overflow:'hidden'
-                                }}
-                                onReady={() => handleVideoIsReady(true)}
-                                playing
-                                controls
-                                url={data.video}
-                            /> */}
             </motion.div>
           </Grid>
           <Grid item xs={12} sm={8}>
@@ -216,15 +161,6 @@ const OpenedWorkCard = ({ data, index, setSelectedWork }) => {
             </Box>
           </Grid>
         </Grid>
-
-        {/* <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                    <Grid item xs={4} >
-                        <Box>xs=2</Box>
-                    </Grid>
-                    <Grid item xs={8} >
-                        <Box>xs=2</Box>
-                    </Grid>
-                </Grid> */}
       </Card>
     </>
   );

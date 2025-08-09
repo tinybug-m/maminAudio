@@ -1,7 +1,7 @@
-import LandingPage from "@/pages/LandingPage/LandingPage";
+import LandingPage from "@/pages/LandingPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AboutPage from "@/about/AboutPage";
-import Contnact from "@/contact/ContactPage";
+import AboutPage from "@/pages/About";
+import Contnact from "@/pages/Contact";
 import { ThemeProvider } from "@mui/material/styles";
 
 import CssBaseline from "@mui/material/CssBaseline";

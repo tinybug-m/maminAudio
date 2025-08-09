@@ -1,7 +1,8 @@
 import { Box, Container, Typography } from "@mui/material";
-import { heroDefaultCss } from "../landingPage/components/data/heroDefaultCss";
-import SocialMediaIcons from "../components/universal/SocialMediaIcons";
+import SocialMediaIcons from "@/components/universal/SocialMediaIcons";
 import { motion } from "framer-motion";
+import { heroDefaultCss } from "@/pages/LandingPage/Hero";
+import React from "react";
 
 const AboutHero = () => {
   return (
@@ -45,7 +46,6 @@ const AboutHero = () => {
                 Helping businesses succeed though the power of music.
               </Typography>
               <Typography
-                background
                 variant="body1"
                 color="white"
                 sx={{ backgroundColor: "rgba(217,217,217,0.15)", px: 2, py: 1 }}
@@ -61,7 +61,7 @@ const AboutHero = () => {
             <center>
               <img
                 src="./static/About/mamin.png"
-                style={{ "max-width": "100%" }}
+                style={{ maxWidth: "100%" }}
                 alt=""
               />
             </center>

@@ -1,7 +1,7 @@
 "use client";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect } from "react";
-
+import React from "react";
 
 export default function RedoAnimText({ delay }) {
   const textIndex = useMotionValue(0);
@@ -14,7 +14,7 @@ export default function RedoAnimText({ delay }) {
     "I find myself compelled to express my interest due to...",
     "My pen (or should I say, keyboard) is at work today because...",
     "Inspired by the alluring challenge in the job posting, I am writing...",
-    "Stirred to my keyboard by the tantalizing nature of the role…"
+    "Stirred to my keyboard by the tantalizing nature of the role…",
   ];
 
   const baseText = useTransform(textIndex, (latest) => texts[latest] || "");
@@ -45,7 +45,7 @@ export default function RedoAnimText({ delay }) {
           }
           updatedThisRound.set(true);
         }
-      }
+      },
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

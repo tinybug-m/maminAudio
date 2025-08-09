@@ -1,9 +1,11 @@
 import { Box, Container, Typography, Grid } from "@mui/material";
-import { heroDefaultCss } from "../landingPage/components/data/heroDefaultCss";
-import SocialMediaIcons from "../components/universal/SocialMediaIcons";
-import ContactForm from "./ContactForm";
-import ContactOptions from "./ContactOptions";
+import SocialMediaIcons from "@/components/universal/SocialMediaIcons";
+import ContactForm from "@/pages/Contact/ContactForm";
+import ContactOptions from "@/pages/Contact/ContactOptions";
 import { motion } from "framer-motion";
+import { heroDefaultCss } from "@/pages/LandingPage/Hero";
+import React from "react";
+
 const ContactHero = () => {
   return (
     <Box

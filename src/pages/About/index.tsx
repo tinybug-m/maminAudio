@@ -1,14 +1,9 @@
-import { Container, Typography } from "@mui/material";
 import AboutHero from "./AboutHero";
 import StoryOfMamin from "./StoryOfMamin";
-import Footer from "../components/universal/Footer";
+import Footer from "@/components/universal/Footer";
 import AboutClients from "./AboutClients";
-import { useEffect, useState } from "react";
+import React from "react";
 const AboutPage = () => {
-  useEffect(() => {
-    //   handleLoading()
-  }, []);
-
   return (
     <>
       <AboutHero />

@@ -7,13 +7,13 @@ import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 
 import Typography from "@mui/material/Typography";
 
-import WorkCard from "./Card/WorkCard";
+import WorkCard, { WorkProps } from "./WorkCard/WorkCard";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import OpenedWorkCard from "./Card/OpenedWorkCard";
+import OpenedWorkCard from "./WorkCard/OpenedWorkCard";
 import Axios from "axios";
 import { useEffect } from "react";
-import WorkCardSkeleton from "./Card/WorkCardSkeleton";
+import WorkCardSkeleton from "./WorkCard/WorkCardSkeleton";
 
 export default function Features() {
   const [catFact, setCatFact] = useState();
@@ -39,9 +39,10 @@ export default function Features() {
       });
   };
 
-  const [works, setWorks] = useState([
+  const [works, setWorks] = useState<WorkProps[]>([
     {
       img: "/static/images/cards/chi.png",
+      video: "",
       title: "Lizard",
       tags: ["Motion Graphic", "Animation", "Animation"],
       description:
@@ -49,6 +50,7 @@ export default function Features() {
     },
     {
       img: "/static/images/cards/chi.png",
+      video: "",
       title: "Lizard",
       tags: [
         "Motion Graphic",
@@ -62,6 +64,7 @@ export default function Features() {
     },
     {
       img: "/static/images/cards/chi.png",
+      video: "",
       title: "Lizard",
       tags: ["Motion Graphic", "Animation"],
       description:
@@ -69,6 +72,7 @@ export default function Features() {
     },
     {
       img: "/static/images/cards/chi.png",
+      video: "",
       title: "Lizard",
       tags: ["Motion Graphic", "Animation"],
       description:
@@ -76,6 +80,7 @@ export default function Features() {
     },
     {
       img: "/static/images/cards/chi.png",
+      video: "",
       title: "Lizard",
       tags: ["Motion Graphic", "Animation"],
       description:
@@ -83,6 +88,7 @@ export default function Features() {
     },
     {
       img: "/static/images/cards/chi.png",
+      video: "",
       title: "Lizard",
       tags: ["Motion Graphic", "Animation"],
       description:
@@ -90,6 +96,7 @@ export default function Features() {
     },
     {
       img: "/static/images/cards/chi.png",
+      video: "",
       title: "Lizard",
       tags: ["Motion Graphic", "Animation"],
       description:
@@ -97,6 +104,7 @@ export default function Features() {
     },
     {
       img: "/static/images/cards/chi.png",
+      video: "",
       title: "Lizard",
       tags: ["Motion Graphic", "Animation"],
       description:
@@ -104,6 +112,7 @@ export default function Features() {
     },
     {
       img: "/static/images/cards/chi.png",
+      video: "",
       title: "Lizard",
       tags: ["Motion Graphic", "Animation"],
       description:
@@ -111,6 +120,7 @@ export default function Features() {
     },
     {
       img: "/static/images/cards/chi.png",
+      video: "",
       title: "Lizard",
       tags: ["Motion Graphic", "Animation"],
       description:
@@ -118,6 +128,7 @@ export default function Features() {
     },
     {
       img: "/static/images/cards/chi.png",
+      video: "",
       title: "Lizard",
       tags: ["Motion Graphic", "Animation"],
       description:
@@ -125,6 +136,7 @@ export default function Features() {
     },
     {
       img: "/static/images/cards/chi.png",
+      video: "",
       title: "Lizard",
       tags: ["Motion Graphic", "Animation"],
       description:
@@ -148,13 +160,13 @@ export default function Features() {
   };
 
   const [loading, setLoading] = useState(false);
-  const [categories, setCategories] = useState([
+  const categories = [
     { name: "All", slug: "All" },
     { name: "Motion graphic", slug: "motiongraphic" },
     { name: "Animation", slug: "animation" },
     { name: "StopMotion", slug: "stopmotion" },
     { name: "2D", slug: "2danimation" },
-  ]);
+  ];
   const [activeCategory, setActiveCategory] = useState("All");
 
   const handleSetCategory = (slug) => {
@@ -170,7 +182,6 @@ export default function Features() {
   };
   return (
     <Box sx={{ background: "#DFD5EC" }}>
-      {/* {catFact} */}
       <Container id="features" sx={{ py: { xs: 8, sm: 16 } }}>
         <Typography
           variant="h3"

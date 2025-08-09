@@ -5,6 +5,21 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import { Box, Button, CardActionArea, Grid } from "@mui/material";
 import { motion } from "framer-motion";
+import React from "react";
+
+export type WorkProps = {
+  img: string;
+  video: string;
+  title: string;
+  description: string;
+  tags: Array<string>;
+};
+export type WorkCardProps = {
+  data: WorkProps;
+  index: number;
+  setSelectedWork: (number: number) => void;
+};
+
 const WorkCard = ({ data, index, setSelectedWork }) => {
   return (
     <>
@@ -73,7 +88,6 @@ const WorkCard = ({ data, index, setSelectedWork }) => {
                     />
                   );
                 })}
-                {/* <Chip label="Animation" sx={{ color: "white", backgroundColor: "rgba(136,136,136,0.5)" }} onClick={() => { }} /> */}
 
                 <Button
                   onClick={() => {

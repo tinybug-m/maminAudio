@@ -13,6 +13,7 @@ import {
   MenuItem,
   TextField,
 } from "@mui/material";
+
 import TitleIcon from "@mui/icons-material/Title";
 import Axios from "axios";
 import { useForm } from "react-hook-form";
@@ -20,12 +21,12 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useRef } from "react";
-import MaminSnack from "../components/universal/MaminSnack";
+import MaminSnack from "@/components/universal/MaminSnack";
+import React from "react";
 
 const ContactForm = () => {
-  // console.log(watch("example"))
   const [loading, setLoading] = useState(false);
-  const childRef = useRef();
+  const childRef = useRef(null);
 
   const schema = yup
     .object({
@@ -90,7 +91,7 @@ const ContactForm = () => {
               placeholder="Full Name"
               id="outlined-start-adornment"
               fullWidth
-              error={errors.name}
+              error={!errors.name}
               {...register("name")}
               InputProps={{
                 startAdornment: (
@@ -107,7 +108,7 @@ const ContactForm = () => {
               placeholder="info@mamina..."
               id="outlined-start-adornment"
               fullWidth
-              error={errors.email}
+              error={!errors.email}
               {...register("email")}
               InputProps={{
                 startAdornment: (
@@ -123,7 +124,7 @@ const ContactForm = () => {
             <TextField
               label="Topic"
               placeholder="Select topic"
-              error={errors.topic}
+              error={!errors.topic}
               {...register("topic")}
               fullWidth
               InputProps={{
@@ -145,7 +146,7 @@ const ContactForm = () => {
               id="select"
               label="Subject"
               placeholder="Write about your project subject"
-              error={errors.subject}
+              error={!errors.subject}
               {...register("subject")}
               fullWidth
               InputProps={{
@@ -161,7 +162,7 @@ const ContactForm = () => {
             <TextField
               label="Description"
               placeholder="Write about your project"
-              error={errors.description}
+              error={!errors.description}
               {...register("description")}
               fullWidth
               multiline
