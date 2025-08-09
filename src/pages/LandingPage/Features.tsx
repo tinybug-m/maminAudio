@@ -14,6 +14,8 @@ import OpenedWorkCard from "./WorkCard/OpenedWorkCard";
 import Axios from "axios";
 import { useEffect } from "react";
 import WorkCardSkeleton from "./WorkCard/WorkCardSkeleton";
+import { WORKS_MOCK_DATA } from "@/utils/mockDatas";
+import { getPostsApi } from "@/utils/api";
 
 export default function Features() {
   const [catFact, setCatFact] = useState();
@@ -24,125 +26,23 @@ export default function Features() {
 
   const getPosts = () => {
     setLoading(true);
-    const urlemoon = `https://api.maminaudio.com/wp-json/my/v1/crte/1?tags=${activeCategory}`;
-    console.log(urlemoon);
-    Axios.get(urlemoon)
+
+    getPostsApi(activeCategory)
       .then((res) => {
+        const data = JSON.parse(res.data);
         setCatFact(res.data);
-        setWorks(JSON.parse(res.data));
-        console.log(JSON.parse(res.data));
-        setLoading(false);
+        setWorks(data);
+        console.log(data);
       })
       .catch((err) => {
-        console.log({ err });
+        console.error(err);
+      })
+      .finally(() => {
         setLoading(false);
       });
   };
 
-  const [works, setWorks] = useState<WorkProps[]>([
-    {
-      img: "/static/images/cards/chi.png",
-      video: "",
-      title: "Lizard",
-      tags: ["Motion Graphic", "Animation", "Animation"],
-      description:
-        "its gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxt",
-    },
-    {
-      img: "/static/images/cards/chi.png",
-      video: "",
-      title: "Lizard",
-      tags: [
-        "Motion Graphic",
-        "Animation",
-        "Animation",
-        "Animation",
-        "Animation",
-      ],
-      description:
-        "its gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxt",
-    },
-    {
-      img: "/static/images/cards/chi.png",
-      video: "",
-      title: "Lizard",
-      tags: ["Motion Graphic", "Animation"],
-      description:
-        "its gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxt",
-    },
-    {
-      img: "/static/images/cards/chi.png",
-      video: "",
-      title: "Lizard",
-      tags: ["Motion Graphic", "Animation"],
-      description:
-        "its gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxt",
-    },
-    {
-      img: "/static/images/cards/chi.png",
-      video: "",
-      title: "Lizard",
-      tags: ["Motion Graphic", "Animation"],
-      description:
-        "its gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxt",
-    },
-    {
-      img: "/static/images/cards/chi.png",
-      video: "",
-      title: "Lizard",
-      tags: ["Motion Graphic", "Animation"],
-      description:
-        "its gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxt",
-    },
-    {
-      img: "/static/images/cards/chi.png",
-      video: "",
-      title: "Lizard",
-      tags: ["Motion Graphic", "Animation"],
-      description:
-        "its gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxt",
-    },
-    {
-      img: "/static/images/cards/chi.png",
-      video: "",
-      title: "Lizard",
-      tags: ["Motion Graphic", "Animation"],
-      description:
-        "its gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxt",
-    },
-    {
-      img: "/static/images/cards/chi.png",
-      video: "",
-      title: "Lizard",
-      tags: ["Motion Graphic", "Animation"],
-      description:
-        "its gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxt",
-    },
-    {
-      img: "/static/images/cards/chi.png",
-      video: "",
-      title: "Lizard",
-      tags: ["Motion Graphic", "Animation"],
-      description:
-        "its gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxt",
-    },
-    {
-      img: "/static/images/cards/chi.png",
-      video: "",
-      title: "Lizard",
-      tags: ["Motion Graphic", "Animation"],
-      description:
-        "its gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxt",
-    },
-    {
-      img: "/static/images/cards/chi.png",
-      video: "",
-      title: "Lizard",
-      tags: ["Motion Graphic", "Animation"],
-      description:
-        "its gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxtits gonna be a long long texxt",
-    },
-  ]);
+  const [works, setWorks] = useState<WorkProps[]>(WORKS_MOCK_DATA);
   const [selectedWork, setSelectedWork] = useState(0);
 
   const handleSetSelectedWork = (value) => {
