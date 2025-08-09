@@ -1,25 +1,21 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
-
+import Grid from "@mui/material/Unstable_Grid2";
 import Typography from "@mui/material/Typography";
 
-import WorkCard, { WorkProps } from "./WorkCard/WorkCard";
-import { useState } from "react";
+import WorkCardSkeleton from "@/pages/LandingPage/WorkCard/WorkCardSkeleton";
+import WorkCard, { WorkProps } from "@/pages/LandingPage/WorkCard/WorkCard";
+import OpenedWorkCard from "@/pages/LandingPage/WorkCard/OpenedWorkCard";
+
 import { AnimatePresence } from "framer-motion";
-import OpenedWorkCard from "./WorkCard/OpenedWorkCard";
-import Axios from "axios";
-import { useEffect } from "react";
-import WorkCardSkeleton from "./WorkCard/WorkCardSkeleton";
-import { WORKS_MOCK_DATA } from "@/utils/mockDatas";
+
+import { WORKS_MOCK_CATEGORIES, WORKS_MOCK_DATA } from "@/utils/mockDatas";
 import { getPostsApi } from "@/utils/api";
 
-export default function Features() {
-  const [catFact, setCatFact] = useState();
-
+export default function Works() {
   useEffect(() => {
     getPosts();
   }, []);
@@ -30,12 +26,8 @@ export default function Features() {
     getPostsApi(activeCategory)
       .then((res) => {
         const data = JSON.parse(res.data);
-        setCatFact(res.data);
         setWorks(data);
         console.log(data);
-      })
-      .catch((err) => {
-        console.error(err);
       })
       .finally(() => {
         setLoading(false);
@@ -60,26 +52,18 @@ export default function Features() {
   };
 
   const [loading, setLoading] = useState(false);
-  const categories = [
-    { name: "All", slug: "All" },
-    { name: "Motion graphic", slug: "motiongraphic" },
-    { name: "Animation", slug: "animation" },
-    { name: "StopMotion", slug: "stopmotion" },
-    { name: "2D", slug: "2danimation" },
-  ];
+  const categories = WORKS_MOCK_CATEGORIES;
   const [activeCategory, setActiveCategory] = useState("All");
 
   const handleSetCategory = (slug) => {
     try {
-      console.log("try");
       setActiveCategory(slug);
-    } catch (error) {
-      console.log(error);
     } finally {
       setLoading(true);
       getPosts();
     }
   };
+
   return (
     <Box sx={{ background: "#DFD5EC" }}>
       <Container id="features" sx={{ py: { xs: 8, sm: 16 } }}>
