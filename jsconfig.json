@@ -5,7 +5,10 @@
     "paths": {
       "@/*": ["*"]
     },
-    "allowJs": true
+    "allowJs": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "types": ["vite/client"]
   },
   "include": ["src/**/*"]
 }

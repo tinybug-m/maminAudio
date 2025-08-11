@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { Button, Chip, Grid } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import React from "react";
-import { WorkCardProps } from "@/pages/LandingPage/WorkCard/WorkCard";
+import { WorkCardProps } from "./WorkCard";
 
 const OpenedWorkCard = ({ data, index, setSelectedWork }: WorkCardProps) => {
   return (
@@ -46,7 +46,7 @@ const OpenedWorkCard = ({ data, index, setSelectedWork }: WorkCardProps) => {
           aria-label="fingerprint"
           color="secondary"
           onClick={() => {
-            setSelectedWork(0);
+            setSelectedWork(null);
           }}
         >
           <CloseIcon sx={{ color: "white" }} />
@@ -61,17 +61,36 @@ const OpenedWorkCard = ({ data, index, setSelectedWork }: WorkCardProps) => {
                 padding: "16px",
               }}
             >
-              <iframe
-                src={`https://video.maminaudio.com/?videoID=${data.video}`}
+              <video
+                controls
+                autoPlay
                 style={{
+                  background: "black",
                   maxHeight: "calc(90vh - 32px)",
                   aspectRatio: 6 / 10.5,
                   borderRadius: 20,
+                  border: 0,
                   overflow: "hidden",
                   maxWidth: "100%",
                   width: "100%",
                 }}
-              ></iframe>
+              >
+                <source src={data.video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              {/* <iframe
+                src={data.video}
+                style={{
+                  background: "black",
+                  maxHeight: "calc(90vh - 32px)",
+                  aspectRatio: 6 / 10.5,
+                  borderRadius: 20,
+                  border: 0,
+                  overflow: "hidden",
+                  maxWidth: "100%",
+                  width: "100%",
+                }}
+              ></iframe> */}
             </motion.div>
           </Grid>
           <Grid item xs={12} sm={8}>

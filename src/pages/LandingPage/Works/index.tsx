@@ -16,34 +16,42 @@ import { AnimatePresence } from "framer-motion";
 
 import { WORKS_MOCK_CATEGORIES, WORKS_MOCK_DATA } from "@/utils/mockDatas";
 import { getPostsApi } from "@/utils/api";
+import supabase from "@/utils/supabase";
 
 export default function Works() {
   useEffect(() => {
     getPosts();
   }, []);
 
-  const getPosts = () => {
+  const getPosts = async () => {
     setLoading(true);
 
-    getPostsApi(activeCategory)
-      .then((res) => {
-        const data = JSON.parse(res.data);
-        setWorks(data);
-        console.log(data);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    let { data: posts, error } = await supabase.from("posts").select("*");
+    console.log({ her: posts });
+    if (posts.length > 1) {
+      setWorks(posts);
+    }
+    setLoading(false);
+
+    // getPostsApi(activeCategory)
+    //   .then((res) => {
+    //     const data = JSON.parse(res.data);
+    //     setWorks(data);
+    //     console.log(data);
+    //   })
+    //   .finally(() => {
+    //     setLoading(false);
+    //   });
   };
 
   const [works, setWorks] = useState<WorkProps[]>(WORKS_MOCK_DATA);
-  const [selectedWork, setSelectedWork] = useState(0);
+  const [selectedWork, setSelectedWork] = useState<number | null>(null);
 
   const handleSetSelectedWork = (value) => {
     const html = document.querySelector("html");
     const body = document.querySelector("body");
 
-    if (value !== false) {
+    if (value !== null) {
       html.style["overflow"] = "hidden";
       body.style["paddingRight"] = "16px";
     } else {
@@ -119,7 +127,7 @@ export default function Works() {
         </Grid>
       </Container>
       <AnimatePresence>
-        {selectedWork !== 0 && (
+        {selectedWork !== null && (
           <Box
             sx={{
               position: "fixed",

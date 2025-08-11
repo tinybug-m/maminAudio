@@ -17,7 +17,7 @@ export type WorkProps = {
 export type WorkCardProps = {
   data: WorkProps;
   index: number;
-  setSelectedWork: (number: number) => void;
+  setSelectedWork: (toggle: boolean) => void;
 };
 
 const WorkCard = ({ data, index, setSelectedWork }) => {
