@@ -9,4 +9,7 @@ export default defineConfig({
       "@": path.resolve(process.cwd(), "src"),
     },
   },
+  build: {
+    outDir: "build",
+  },
 });
