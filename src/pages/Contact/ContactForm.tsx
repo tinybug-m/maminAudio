@@ -1,9 +1,12 @@
+import React, { useState, useRef } from "react";
+
 import {
-  AccountCircle,
-  Category,
-  ChatBubbleOutline,
-  Email,
-  Subject,
+  AccountCircle as AccountCircleIcon,
+  Category as CategoryIcon,
+  ChatBubbleOutline as ChatBubbleOutlineIcon,
+  Email as EmailIcon,
+  Subject as SubjectIcon,
+  Title as TitleIcon,
 } from "@mui/icons-material";
 import {
   Box,
@@ -14,15 +17,13 @@ import {
   TextField,
 } from "@mui/material";
 
-import TitleIcon from "@mui/icons-material/Title";
+import MaminSnack from "@/components/universal/MaminSnack";
+
 import Axios from "axios";
+
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState } from "react";
-import { useRef } from "react";
-import MaminSnack from "@/components/universal/MaminSnack";
-import React from "react";
 
 const ContactForm = () => {
   const [loading, setLoading] = useState(false);
@@ -43,35 +44,47 @@ const ContactForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, touchedFields, isSubmitted },
     reset,
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: "onBlur",
+    reValidateMode: "onChange",
+  });
 
   const onSubmit = (data) => {
-    // console.log(data)
     setLoading(true);
     handleSubmiter(data);
   };
 
-  // const [formDatas, setFormDatas] = useState({ name: "", email: '' })
   const handleSubmiter = (data) => {
     Axios.post(
-      "https://api.maminaudio.com/wp-json/my/v1/formHandler/1",
+      "https://api.web3forms.com/submit",
       {
-        data,
+        access_key: "e1648523-c1b5-41ed-a8f8-83f7c461a21c",
+        name: data.name,
+        email: data.email,
+        topic: data.topic,
+        subject: data.subject,
+        description: data.description,
       },
-      { headers: { Accept: "application/json" } }
+      { headers: { "Content-Type": "application/json" } }
     )
       .then((res) => {
-        reset();
-        childRef.current.getAlert(JSON.parse(res.data).message);
+        if (res.data.success) {
+          reset();
+          childRef.current.getAlert("Message sent successfully!");
+        } else {
+          childRef.current.getAlert("Something went wrong!");
+        }
         setLoading(false);
       })
-      .catch((error) => {
-        childRef.current.getAlert("error");
+      .catch(() => {
+        childRef.current.getAlert("Error sending message.");
         setLoading(false);
       });
   };
+
   return (
     <Box
       sx={{
@@ -83,7 +96,6 @@ const ContactForm = () => {
     >
       <MaminSnack ref={childRef} />
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* {formDatas} */}
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -91,12 +103,12 @@ const ContactForm = () => {
               placeholder="Full Name"
               id="outlined-start-adornment"
               fullWidth
-              error={!errors.name}
+              error={!!errors.name && (touchedFields.name || isSubmitted)}
               {...register("name")}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <AccountCircle color={"primary"} />
+                    <AccountCircleIcon color={"primary"} />
                   </InputAdornment>
                 ),
               }}
@@ -108,12 +120,12 @@ const ContactForm = () => {
               placeholder="info@mamina..."
               id="outlined-start-adornment"
               fullWidth
-              error={!errors.email}
+              error={!!errors.email && (touchedFields.email || isSubmitted)}
               {...register("email")}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Email color={"primary"} />
+                    <EmailIcon color={"primary"} />
                   </InputAdornment>
                 ),
               }}
@@ -124,13 +136,13 @@ const ContactForm = () => {
             <TextField
               label="Topic"
               placeholder="Select topic"
-              error={!errors.topic}
+              error={!!errors.topic && (touchedFields.topic || isSubmitted)}
               {...register("topic")}
               fullWidth
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Category color={"primary"} />
+                    <CategoryIcon color={"primary"} />
                   </InputAdornment>
                 ),
               }}
@@ -146,7 +158,7 @@ const ContactForm = () => {
               id="select"
               label="Subject"
               placeholder="Write about your project subject"
-              error={!errors.subject}
+              error={!!errors.subject && (touchedFields.subject || isSubmitted)}
               {...register("subject")}
               fullWidth
               InputProps={{
@@ -162,7 +174,10 @@ const ContactForm = () => {
             <TextField
               label="Description"
               placeholder="Write about your project"
-              error={!errors.description}
+              error={
+                !!errors.description &&
+                (touchedFields.description || isSubmitted)
+              }
               {...register("description")}
               fullWidth
               multiline
@@ -174,7 +189,7 @@ const ContactForm = () => {
                     sx={{ alignSelf: "baseline", pt: 1 }}
                     position="start"
                   >
-                    <Subject color={"primary"} />
+                    <SubjectIcon color={"primary"} />
                   </InputAdornment>
                 ),
               }}
@@ -188,7 +203,7 @@ const ContactForm = () => {
               variant="contained"
               disableElevation
             >
-              <ChatBubbleOutline sx={{ mr: 0.5 }} />
+              <ChatBubbleOutlineIcon sx={{ mr: 0.5 }} />
               Send
             </Button>
           </Grid>
