@@ -19,11 +19,10 @@ import {
 
 import MaminSnack from "@/components/universal/MaminSnack";
 
-import Axios from "axios";
-
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { sendContactForm } from "@/utils/api";
 
 const ContactForm = () => {
   const [loading, setLoading] = useState(false);
@@ -52,37 +51,21 @@ const ContactForm = () => {
     reValidateMode: "onChange",
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     setLoading(true);
-    handleSubmiter(data);
-  };
-
-  const handleSubmiter = (data) => {
-    Axios.post(
-      "https://api.web3forms.com/submit",
-      {
-        access_key: "e1648523-c1b5-41ed-a8f8-83f7c461a21c",
-        name: data.name,
-        email: data.email,
-        topic: data.topic,
-        subject: data.subject,
-        description: data.description,
-      },
-      { headers: { "Content-Type": "application/json" } }
-    )
-      .then((res) => {
-        if (res.data.success) {
-          reset();
-          childRef.current.getAlert("Message sent successfully!");
-        } else {
-          childRef.current.getAlert("Something went wrong!");
-        }
-        setLoading(false);
-      })
-      .catch(() => {
-        childRef.current.getAlert("Error sending message.");
-        setLoading(false);
-      });
+    try {
+      const res = await sendContactForm(data);
+      if (res.success) {
+        reset();
+        childRef.current.getAlert("Message sent successfully!");
+      } else {
+        childRef.current.getAlert("Something went wrong!");
+      }
+    } catch (error) {
+      childRef.current.getAlert("Error sending message.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
